@@ -15,23 +15,31 @@ class Produto extends React.Component {
     this.setState({
       qtd: this.state.qtd + 1,
       total: this.state.total + this.props.p.preco,
+      qtdTotal: this.state.qtdTotal + this.state.qtd
     });
-    this.props.valorFinal(this.props.p.preco);
+    this.props.valorFinal(this.props.p.preco, this.state.qtd);
   }
   render() {
-
-    var curso = "Sistema de Informação";
     return (
       <View style={styles.cardProduct}>
         <Text style={styles.titleProduct}>{this.props.p.nome}</Text>
         <Image source={this.props.p.image} style={styles.imageProduct} />
-        <Text style={styles.descProduct}>
-          {this.props.p.descricao}
-        </Text>
+        <Text style={styles.descProduct}>{this.props.p.descricao}</Text>
         <Text style={styles.precoProduct}>Preço: {this.props.p.preco}</Text>
-        <Button title='Adicionar ao Carrinho' />
-        {/* <Text>Quantidade: {this.state.qtd}</Text>
-          <Text>Total: R$ {this.state.total}</Text> */}
+
+        <Button
+          title="Adicionar ao Carrinho"
+          onPress={this.addProduto.bind(this)}
+        />
+
+        <View style={styles.infoProduct}>
+          <Text style={styles.infoProductText}>
+            Quantidade: {this.state.qtd}
+          </Text>
+          <Text style={styles.infoProductText}>
+            Total: R$ {this.state.total.toFixed(2)}
+          </Text>
+        </View>
       </View>
     );
   }
@@ -47,7 +55,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: '#ff830f',
     borderStyle: 'solid',
-    padding: 12
+    padding: 12,
   },
   imageProduct: {
     borderWidth: 2,
@@ -68,11 +76,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#ff830f',
     padding: 12,
     borderRadius: 5,
-
   },
-  descProduct:{
-    color: '#000'
-  }
+  descProduct: {
+    color: '#000',
+  },
+  infoProduct: {
+    flex: 1,
+    flexDirection: 'row',
+    columnGap: 10,
+    marginTop: 10,
+    padding: 3,
+    borderColor: '#8a4f17',
+    borderWidth: 2,
+    borderRadius: 3,
+  },
+  infoProductText: {
+    fontWeight: '500',
+    color: '#8a4f17',
+  },
 });
 
 export default Produto;

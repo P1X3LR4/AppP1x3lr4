@@ -25,18 +25,20 @@ const produto = [
     nome: 'Processador AMD Ryzen 5 5600G, 3.9GHz (4.4GHz Max Turbo)',
     descricao:
       'Esteja você jogando os jogos mais recentes, projetando o próximo arranha-céu ou analisando dados científicos, a velocidade sem precedentes dos processadores AMD Ryzen série 5000 G para desktop é imparável. Com os processadores AMD Ryzen para desktop, você está sempre na frente.',
-    preco: 819.99,
+    preco: 454.23,
   },
 ];
 
 class Carrinho extends React.Component {
   state = {
     valorTotal: 0,
+    qtdTotal: 0,
   };
 
-  atualizarTotal(valor) {
+  atualizarTotal(valor, quantidade) {
     this.setState({
       valorTotal: this.state.valorTotal + valor,
+      qtdTotal: this.state.qtdTotal + quantidade,
     });
   }
 
@@ -44,16 +46,20 @@ class Carrinho extends React.Component {
     return (
       <ScrollView>
         <View style={styles.sectionContainer}>
+
+
           <Produto p={produto[0]} valorFinal={this.atualizarTotal.bind(this)} />
           <Produto p={produto[1]} valorFinal={this.atualizarTotal.bind(this)} />
           <Produto p={produto[2]} valorFinal={this.atualizarTotal.bind(this)} />
-          {/* <Text>Valor Final: {this.state.valorTotal}</Text> */}
-        </View>
 
-        <View style={styles.previwerBuy}>
-          <Text>Produto: {this.state.quantidade}</Text>
-          <Text>Quantidade: {this.state.quantidade}</Text>
-          <Text>Valor Total: {this.state.quantidade}</Text>
+
+          <View style={styles.previwerBuy}>
+            <Text style={styles.previwerBuyText}>Produto: {this.state.quantidade}</Text>
+            <Text style={styles.previwerBuyText}>Quantidade: {this.state.qtdTotal}</Text>
+            <Text style={styles.previwerBuyText}>Valor Total: {this.state.valorTotal.toFixed(2)}</Text>
+          </View>
+
+
         </View>
       </ScrollView>
     );
@@ -67,6 +73,16 @@ const styles = StyleSheet.create({
     rowGap: 10,
     padding: 10,
   },
+  previwerBuy: {
+    backgroundColor: '#45290f',
+    padding: 20,
+    borderRadius: 5,
+  },
+  previwerBuyText: {
+    fontWeight: '600',
+    color: '#fff1e3',
+    fontSize: 14
+  }
 });
 
 export default Carrinho;
