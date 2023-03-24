@@ -7,15 +7,14 @@ class Product extends React.Component {
       <View style={styles.sectionContainer}>
         <FlatList
           data={this.props.p}
-          horizontal
           renderItem={({item}) => (
             <View>
               <ScrollView horizontal>
                 <Image source={item.images.img01} style={styles.imageProduct} />
                 <Image source={item.images.img02} style={styles.imageProduct} />
                 <Image source={item.images.img03} style={styles.imageProduct} />
-                <Text>{item}</Text>
               </ScrollView>
+                <Text>{item.nome}</Text>
             </View>
           )}
         />
